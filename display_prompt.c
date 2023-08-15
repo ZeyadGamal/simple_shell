@@ -49,8 +49,7 @@ void display_prompt(char *argv[], char *envp[])
 		}
 		if (child_process == 0)
 		{
-			if (execve(av[0], av, envp) == -1)
-				printf("%s: No such file or directory\n", argv[0]);
+			execute_command(av, envp, argv[0]);
 		}
 		else
 			wait(&status);
