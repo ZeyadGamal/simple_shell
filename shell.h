@@ -7,7 +7,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-
+#include <sys/wait.h>
 
 
 #define MAX_COMM 5
@@ -15,6 +15,6 @@
 
 void display_prompt(char *argv[], char *envp[]);
 char *get_PATH(char *command);
-void execute_command(char *av[], char *envp[], char *comm);
+void execute_command(char *av[], char *envp[], char *comm, char **str);
 
 #endif
