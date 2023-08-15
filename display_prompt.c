@@ -9,15 +9,16 @@
 void display_prompt(char *argv[], char *envp[])
 {
 	char *str;
-	int i, status;
+	int i, status, j;
 	size_t n = 0;
 	ssize_t char_num = 0;
 	pid_t child_process;
-	char *av[] = {NULL, NULL};
+	char *av[MAX_COMM];
 
 	while (1)
 	{
-		printf("$");
+		if (isatty(STDIN_FILENO))
+			printf("$ ");
 
 		char_num = getline(&str, &n, stdin);
 		if (char_num == -1)
@@ -33,7 +34,13 @@ void display_prompt(char *argv[], char *envp[])
 				str[i] = 0;
 			i++;
 		}
-		av[0] = str;
+		av[0] = strtok(str, " ");
+		j = 0;
+		while (av[j])
+		{
+			++j;
+			av[j] = strtok(NULL, " ");
+		}
 		child_process = fork();
 		if (child_process == -1)
 		{
