@@ -9,9 +9,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-
 #define MAX_COMM 5
-
+#define BUFFER_SIZE 1024
 
 void display_prompt(char *argv[], char *envp[]);
 char *get_PATH(char *command);
