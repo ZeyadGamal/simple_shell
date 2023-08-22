@@ -45,7 +45,7 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 		}
 		else
 		{
-			printf("%s: command not found\n", comm);
+			printf("%s: 1: %s: not found\n", comm, command);
 		}
 	}
 }
