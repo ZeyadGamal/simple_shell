@@ -2,19 +2,22 @@
 
 /**
  * execute_command - uses execve to execute command
- * @argv: commands
+ * @av: commands
+ * @envp: environmental variables
+ * @comm: argv[0]
+ * @str: string
  */
-void execute_command(char **argv)
+void execute_command(char *av[], char *envp[], char *comm, char **str)
 {
 	pid_t child_process;
 	char *command = NULL;
 	char *command_actual = NULL;
 	int status;
 
-	if (argv)
+	if (av)
 	{
-		command = argv[0];
-		command_actual = get_path(command);
+		command = av[0];
+		command_actual = get_PATH(command);
 
 		if (strcmp(command, "exit") == 0)
 		{
@@ -26,14 +29,15 @@ void execute_command(char **argv)
 			child_process = fork();
 			if (child_process == -1)
 			{
+				free(*str);
 				exit(EXIT_FAILURE);
 			}
 			if (child_process == 0)
 			{
 
-				if (execve(command_actual, argv, NULL) == -1)
+				if (execve(command_actual, av, envp) == -1)
 				{
-					printf("%s: No such file or directory\n", command);
+					printf("%s: No such file or directory\n", comm);
 				}
 			}
 			else
@@ -41,7 +45,7 @@ void execute_command(char **argv)
 		}
 		else
 		{
-			printf("Error");
+			printf("%s: 1: %s: not found\n", comm, command);
 		}
 	}
 }
