@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * get_path - gets path of a command
+ * get_PATH - gets path of a command
  * @command: command entered
  *
  * Return: the path
  */
-char *get_path(char *command)
+char *get_PATH(char *command)
 {
 	char *path, *path_duplicate, *path_token, *file_path;
 	int command_len, dir_len;
