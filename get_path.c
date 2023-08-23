@@ -42,7 +42,6 @@ char *get_PATH(char *command)
 		{
 			return (command);
 		}
-
 		return (NULL);
 	}
 	return (NULL);
