@@ -3,7 +3,7 @@
 /**
  * get_PATH - gets path of a command
  * @command: command entered
- *
+ * 
  * Return: the path
  */
 char *get_PATH(char *command)
