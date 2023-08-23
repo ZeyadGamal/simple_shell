@@ -12,5 +12,5 @@ int main(int argc, char *argv[], char *envp[])
 	if (argc == 1)
 		display_prompt(argv, envp);
 
-	return (1);
+	return (0);
 }

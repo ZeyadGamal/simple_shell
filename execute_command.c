@@ -17,8 +17,9 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 	if (av)
 	{
 		command = av[0];
+		if (command == NULL)
+			return;
 		command_actual = get_PATH(command);
-
 		if (strcmp(command, "exit") == 0)
 		{
 			printf("Exiting Shell\n");
@@ -30,7 +31,7 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 			if (child_process == -1)
 			{
 				free(*str);
-				exit(EXIT_FAILURE);
+				exit(0);
 			}
 			if (child_process == 0)
 			{
