@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/** 
+/**
  * execute_command - uses execve to execute command
  * @av: commands
  * @envp: environmental variables
