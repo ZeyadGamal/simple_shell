@@ -7,16 +7,14 @@
  */
 void display_prompt(char *argv[], char *envp[])
 {
-	char *str = NULL;
-	char *str_copy = NULL;
+	char *str, *av[MAX_COMM];
 	int i, j;
 	size_t n = 0;
 	ssize_t char_num = 0;
-	char *av[MAX_COMM];
 
 	while (1)
 	{
-		str = NULL;
+		str = malloc((sizeof(char) * char_num) + 1);
 		if (isatty(STDIN_FILENO))
 			printf("$ ");
 		char_num = getline(&str, &n, stdin);
@@ -25,24 +23,19 @@ void display_prompt(char *argv[], char *envp[])
 			free(str);
 			exit(0);
 		}
-		str_copy = malloc((sizeof(char) * char_num) + 1);
-		if (str_copy == NULL)
-		{
+		if (str == NULL)
 			perror("Memory Allocation error");
-		}
-		strcpy(str_copy, str);
 		i = 0;
-		while (str_copy[i])
+		while (str[i])
 		{
-			if (str_copy[i] == '\n')
-				str_copy[i] = 0;
+			if (str[i] == '\n')
+				str[i] = 0;
 			i++;
 		}
-		av[0] = strtok(str_copy, " ");
+		av[0] = strtok(str, " ");
 		if (av[0] == NULL)
 		{
 			free(str);
-			free(str_copy);
 			continue;
 		}
 		j = 0;
@@ -51,6 +44,6 @@ void display_prompt(char *argv[], char *envp[])
 			++j;
 			av[j] = strtok(NULL, " ");
 		}
-		execute_command(av, envp, argv[0], &str_copy);
+		execute_command(av, envp, argv[0], &str);
 	}
 }

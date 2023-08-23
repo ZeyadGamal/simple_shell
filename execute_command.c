@@ -22,7 +22,6 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 		command_actual = get_PATH(command);
 		if (strcmp(command, "exit") == 0)
 		{
-			printf("Exiting Shell\n");
 			exit(0);
 		}
 		if (command_actual)
