@@ -42,6 +42,7 @@ void display_prompt(char *argv[], char *envp[])
 		if (av[0] == NULL)
 		{
 			free(str);
+			free(str_copy);
 			continue;
 		}
 		j = 0;
