@@ -25,7 +25,7 @@ void display_prompt(char *argv[], char *envp[])
 			free(str);
 			exit(0);
 		}
-		str_copy = malloc(sizeof(char) * char_num);
+		str_copy = malloc((sizeof(char) * char_num) + 1);
 		if (str_copy == NULL)
 		{
 			perror("Memory Allocation error");
