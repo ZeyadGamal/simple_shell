@@ -39,10 +39,10 @@ char *get_PATH(char *command)
 		}
 		free(path_duplicate);
 		if (stat(command, &buffer) == 0)
-		{
 			return (command);
-		}
 		return (NULL);
 	}
+	if (stat(command, &buffer) == 0)
+		return (command);
 	return (NULL);
 }

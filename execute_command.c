@@ -48,6 +48,10 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 				free(command_actual);
 		}
 		else
-			printf("%s: 1: %s: not found\n", comm, command);
+		{
+			fprintf(stderr, "%s: 1: %s: not found\n", comm, command);
+			if (!isatty(STDIN_FILENO))
+				exit(127);
+		}
 	}
 }
