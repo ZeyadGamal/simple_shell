@@ -32,28 +32,27 @@ void display_prompt(char *argv[], char *envp[])
 			exit(1);
 		}
 		strcpy(str, str_temp);
+		free(str_temp);
 		i = 0;
-		while (str[i])
-		{
-			if (str[i] == '\n')
-				str[i] = 0;
-			i++;
-		}
-		av[0] = strtok(str, " ");
-		if (av[0] == NULL)
-		{
-			free(str_temp);
-			free(str);
-			continue;
-		}
-		j = 0;
-		while (av[j])
-		{
-			++j;
-			av[j] = strtok(NULL, " ");
-		}
+                while (str[i])
+                {
+                        if (str[i] == '\n')
+                                str[i] = 0;
+                        i++;
+                }
+                av[0] = strtok(str, " ");
+                if (av[0] == NULL)
+                {
+                        free(str);
+                        continue;
+                }
+                j = 0;
+                while (av[j])
+                {
+                        ++j;
+                        av[j] = strtok(NULL, " ");
+                }
 		execute_command(av, envp, argv[0], &str);
 		free(str);
-		free(str_temp);
 	}
 }

@@ -10,10 +10,8 @@
 void execute_command(char *av[], char *envp[], char *comm, char **str)
 {
 	pid_t child_process;
-	char *command = NULL;
-	char *command_actual;
-	int status;
-	int flag;
+	char *command = NULL, *command_actual;
+	int status, flag;
 
 	if (av)
 	{
@@ -22,6 +20,7 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 			return;
 		if (strcmp(command, "exit") == 0)
 		{
+			free(*str);
 			exit(0);
 		}
 		command_actual = get_PATH(command);
@@ -49,8 +48,6 @@ void execute_command(char *av[], char *envp[], char *comm, char **str)
 				free(command_actual);
 		}
 		else
-		{
 			printf("%s: 1: %s: not found\n", comm, command);
-		}
 	}
 }
